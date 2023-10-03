@@ -18,6 +18,8 @@ class User(db.Model, SerializerMixin):
     username = db.Column(db.String, nullable=False, unique=True)
     _password_hash = db.Column(db.String)
 
+    wishlists = db.relationship('Wishlist', backref='user')
+
     @hybrid_property
     def password_hash(self):
         raise AttributeError('Password hashes may not be viewed.')
@@ -76,6 +78,7 @@ class Wishlist(db.Model, SerializerMixin):
     title = db.Column(db.String, nullable=False)
 
     products = db.relationship('Product', secondary=wishlist_product, back_populates='wishlists')
+    user_id = db.Column(db.Integer(), db.ForeignKey('users.id'))
 
     def __repr__(self):
         return f"\n<Wishlist " + \
