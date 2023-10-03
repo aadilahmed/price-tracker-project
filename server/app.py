@@ -34,8 +34,26 @@ class Signup(Resource):
 
         return {'error': '422 Unprocessable Entity'}, 422
 
+class Login(Resource):
+    def post(self):
+        username = request.get_json()['username']
+        password = request.get_json()['password']
+
+        user = User.query.filter(User.username == username).first()
+        if user and user.authenticate(password):
+            session['user_id'] = user.id
+            return user.to_dict(), 200
+        else:
+            return {'error': '401 Unauthorized'}, 401
+        
+class ProductIndex(Resource):
+    pass
+
+class ProductDetail(Resource):
+    pass
 
 api.add_resource(Signup, '/signup', endpoint='signup')
+api.add_resource(Login, '/login', endpoint='login')
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
