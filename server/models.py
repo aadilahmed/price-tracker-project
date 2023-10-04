@@ -46,6 +46,7 @@ class Product(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False)
     current_price = db.Column(db.Integer)
+    url = db.Column(db.String)
 
     prices = db.relationship('Price', backref='product')
     wishlists = db.relationship('Wishlist', secondary=wishlist_product, back_populates='products')

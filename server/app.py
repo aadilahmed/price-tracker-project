@@ -33,6 +33,13 @@ class Signup(Resource):
             return new_user.to_dict(), 201
 
         return {'error': '422 Unprocessable Entity'}, 422
+    
+class CheckSession(Resource):
+    def get(self):
+        if session.get('user_id'):
+            user = User.query.filter(User.id == session['user_id']).first()
+            return user.to_dict(), 200
+        return {'error': '401 Resource not found'}, 401
 
 class Login(Resource):
     def post(self):
@@ -52,7 +59,14 @@ class ProductIndex(Resource):
 class ProductDetail(Resource):
     pass
 
+class WishlistIndex(Resource):
+    pass
+
+class WishlistDetail(Resource):
+    pass
+
 api.add_resource(Signup, '/signup', endpoint='signup')
+api.add_resource(CheckSession, '/check_session', endpoint='check_session')
 api.add_resource(Login, '/login', endpoint='login')
 
 if __name__ == '__main__':
