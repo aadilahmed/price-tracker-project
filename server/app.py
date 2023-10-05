@@ -5,6 +5,7 @@
 # Remote library imports
 from flask import request, session
 from flask_restful import Resource
+from sqlalchemy.exc import IntegrityError
 
 # Local imports
 from config import app, db, api
@@ -54,20 +55,74 @@ class Login(Resource):
             return {'error': '401 Unauthorized'}, 401
         
 class ProductIndex(Resource):
-    pass
+    def get(self):
+        products = Product.query.all()
+        return [product.to_dict() for product in products], 200
+    
+    def post(self):
+        name = request.get_json()['name']
+        current_price = request.get_json()['price']
+        url = request.get_json()['url']
 
-class ProductDetail(Resource):
-    pass
+        try:
+            product = Product(name = name, current_price = current_price, url = url)
+                
+            db.session.add(product)
+            db.session.commit()
+
+            return product.to_dict(), 201
+        except IntegrityError:
+            return {'error': '422 Unprocessable entity'}, 422
+
+class ProductByID(Resource):
+    def get(self, id):
+        product = Product.query.filter(Product.id == id).first().to_dict()
+
+        return product, 200
 
 class WishlistIndex(Resource):
-    pass
+    def get(self):
+        if session.get('user_id'):
+            wishlists = Wishlist.query.filter(Wishlist.user_id == session['user_id']).all()
+            return [wishlist.to_dict() for wishlist in wishlists], 200
+        return {'error': '401 Unauthorized'}, 401
+    
+    def post(self):
+        if session.get('user_id'):
+            title = request.get_json()['title']
 
-class WishlistDetail(Resource):
-    pass
+            try:
+                wishlist = Wishlist(title = title, user_id = session['user_id'])
+                    
+                db.session.add(wishlist)
+                db.session.commit()
+
+                return wishlist.to_dict(), 201
+            except IntegrityError:
+                return {'error': '422 Unprocessable entity'}, 422
+        else:
+            return {'error': '401 Unauthorized'}, 401
+
+class WishlistByID(Resource):
+    def get(self, id):
+        pass
+
+    def post(self, id):
+        pass
+
+    def patch(self, id):
+        pass
+
+    def delete(self, id):
+        pass
 
 api.add_resource(Signup, '/signup', endpoint='signup')
 api.add_resource(CheckSession, '/check_session', endpoint='check_session')
 api.add_resource(Login, '/login', endpoint='login')
+api.add_resource(ProductIndex, '/products', endpoint='products')
+api.add_resource(ProductByID, '/products/<int:id>', endpoint='product')
+api.add_resource(WishlistIndex, '/wishlists', endpoint='wishlists')
+api.add_resource(WishlistByID, '/wishlists/<int:id>', endpoint='wishlist')
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
