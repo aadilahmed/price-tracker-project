@@ -1,9 +1,17 @@
 import React from "react";
+import { Card } from "semantic-ui-react";
 
-function ProductCard() {
+function ProductCard({ name, url, current_price }) {
     return (
-        <h1>Product Card</h1>
-    )
+      <Card textAlign="center">
+        <div className="productcard">
+          <div className="name">{name}</div>
+          <div className="current-price">
+            $ {current_price.toFixed(2)}
+          </div>
+        </div>
+      </Card>
+    );
 }
 
 export default ProductCard
