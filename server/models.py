@@ -20,6 +20,8 @@ class User(db.Model, SerializerMixin):
 
     wishlists = db.relationship('Wishlist', backref='user')
 
+    serialize_rules = ("-wishlists", "-_password_hash",)
+
     @hybrid_property
     def password_hash(self):
         raise AttributeError('Password hashes may not be viewed.')
@@ -50,6 +52,8 @@ class Product(db.Model, SerializerMixin):
 
     prices = db.relationship('Price', backref='product')
     wishlists = db.relationship('Wishlist', secondary=wishlist_product, back_populates='products')
+
+    serialize_rules = ("-prices", "-wishlists",)
 
     def __repr__(self):
         return f"\n<Product " + \
