@@ -9,12 +9,19 @@ function NavBar({user}) {
           <Header>
             Price Tracker
           </Header>
+          {user ? 
+          <NavLink
+            to="/signup"
+            exact
+          >
+           Welcome!
+          </NavLink> :
           <NavLink
             to="/login"
             exact
           >
            Log In
-          </NavLink>
+          </NavLink>}
           <NavLink
             to="/products"
             exact

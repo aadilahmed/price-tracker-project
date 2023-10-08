@@ -5,6 +5,7 @@ import WishlistPage from "./WishlistPage";
 import ProductPage from "./ProductPage";
 import ProductDetail from "./ProductDetail";
 import LoginForm from "./LoginForm";
+import SignUpForm from "./SignUpForm";
 
 function App() {
   const [products, setProducts] = useState([]);
@@ -44,6 +45,9 @@ function App() {
         </Route>
         <Route exact path="/login">
           <LoginForm onLogin={setUser}/>
+        </Route>
+        <Route exact path="/signup">
+          <SignUpForm onLogin={setUser}/>
         </Route>
       </Switch>
     </div>
