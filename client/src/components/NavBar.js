@@ -1,41 +1,41 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { Header } from "semantic-ui-react";
+import { Header, Button } from "semantic-ui-react";
 
-function NavBar({user}) {
-    return (
-        // Sidebar includes routes to Home and Create pages
-        <div className="sidebar">
-          <Header>
-            Price Tracker
-          </Header>
-          { !user ?
-          <NavLink
-            to="/login"
-            exact
-          >
-           Log In
-          </NavLink> : null}
-          <NavLink
-            to="/products"
-            exact
-          >
-            All Products
+function NavBar({ user, setUser }) {
+  function handleLogoutClick() {
+    fetch("/logout", { method: "DELETE" }).then((r) => {
+      if (r.ok) {
+        setUser(null);
+      }
+    });
+  }
+  
+  return (
+    <div className="sidebar">
+      <Header>Price Tracker</Header>
+      <NavLink to="/products" exact>
+        All Products
+      </NavLink>
+      {!user ? (
+        <>
+          <NavLink to="/login" exact>
+            Log In
           </NavLink>
-          <NavLink
-            to="/wishlists"
-            exact
-          >
-            Wishlists
-          </NavLink>
-          <NavLink
-            to="/signup"
-            exact
-          >
+          <NavLink to="/signup" exact>
             Sign Up
           </NavLink>
-        </div>
-      );
+        </>
+      ) : (
+        <>
+          <NavLink to="/wishlists" exact>
+            Wishlists
+          </NavLink>
+          <Button onClick={handleLogoutClick}>Logout</Button>
+        </>
+      )}
+    </div>
+  );
 }
 
-export default NavBar
+export default NavBar;

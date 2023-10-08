@@ -1,6 +1,6 @@
 import React from "react";
 
-function WishlistPage() {
+function WishlistPage({user}) {
     return (
         <h1>Wishlist Page</h1>
     )
