@@ -3,6 +3,7 @@ import { Switch, Route } from "react-router-dom";
 import NavBar from "./NavBar";
 import WishlistForm from "./WishlistForm";
 import ProductPage from "./ProductPage";
+import ProductDetail from "./ProductDetail";
 
 function App() {
   const [products, setProducts] = useState([]);
@@ -27,6 +28,9 @@ function App() {
         </Route>
         <Route exact path="/products">
           <ProductPage products={products} />
+        </Route>
+        <Route exact path="/products/:id">
+          <ProductDetail />
         </Route>
       </Switch>
     </div>
