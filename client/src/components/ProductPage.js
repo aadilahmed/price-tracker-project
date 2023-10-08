@@ -5,7 +5,7 @@ import Search from "./Search";
 
 function ProductPage({ products }) {
     const [query, setQuery] = useState("");
-    const productsToDisplay = products.filter((product) => product.name.includes(query));
+    const productsToDisplay = products.filter((product) => product.name.toLowerCase().includes(query.toLowerCase()));
 
     return (
         <div className="productpage-container">

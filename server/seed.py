@@ -31,11 +31,11 @@ if __name__ == '__main__':
         ]
 
         products = [
-            Product(name="Laptop", current_price=79999, url="https://www.amazon.com/laptop"),
-            Product(name="Headphones", current_price=5999, url="https://www.amazon.com/headphones"),
-            Product(name="Smartphone", current_price=69999, url="https://www.amazon.com/smartphone"),
-            Product(name="Coffee Maker", current_price=2999, url="https://www.amazon.com/coffee_maker"),
-            Product(name="Fitness Tracker", current_price=4999, url="https://www.amazon.com/fitness_tracker")
+            Product(name="Laptop", current_price=79999, url="https://www.amazon.com/laptop", image="https://upload.wikimedia.org/wikipedia/commons/3/37/Schenker_VIA14_Laptop_asv2021-01.jpg"),
+            Product(name="Headphones", current_price=5999, url="https://www.amazon.com/headphones", image="https://upload.wikimedia.org/wikipedia/commons/1/1d/AudioQuest_NightHawk_Carbon_headphones_%2833582571334%29.jpg"),
+            Product(name="Smartphone", current_price=69999, url="https://www.amazon.com/smartphone", image="https://upload.wikimedia.org/wikipedia/commons/4/41/Hitech_Air_A1i.jpg"),
+            Product(name="Coffee Maker", current_price=2999, url="https://www.amazon.com/coffee_maker", image="https://upload.wikimedia.org/wikipedia/commons/6/69/Melitta_Thermal_coffee_maker.jpg"),
+            Product(name="Fitness Tracker", current_price=4999, url="https://www.amazon.com/fitness_tracker", image="https://upload.wikimedia.org/wikipedia/commons/2/22/Cardiac_Sense_Latest_Pic.png")
         ]
 
         laptop_prices = [

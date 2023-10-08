@@ -48,6 +48,7 @@ class Product(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False)
     current_price = db.Column(db.Integer)
+    image = db.Column(db.String)
     url = db.Column(db.String)
 
     prices = db.relationship('Price', backref='product')

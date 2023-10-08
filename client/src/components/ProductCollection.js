@@ -7,12 +7,13 @@ function ProductCollection({ products }) {
     <ProductCard
       key={product.id}
       name={product.name}
+      image={product.image}
       url={product.url}
       current_price={product.current_price}
     />
   ));
 
-  return <Card.Group itemsPerRow={4}>{productsToDisplay}</Card.Group>;
+  return <Card.Group itemsPerRow={5}>{productsToDisplay}</Card.Group>;
 }
 
 export default ProductCollection;
