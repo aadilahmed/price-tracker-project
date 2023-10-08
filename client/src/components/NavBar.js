@@ -9,19 +9,13 @@ function NavBar({user}) {
           <Header>
             Price Tracker
           </Header>
-          {user ? 
-          <NavLink
-            to="/signup"
-            exact
-          >
-           Welcome!
-          </NavLink> :
+          { !user ?
           <NavLink
             to="/login"
             exact
           >
            Log In
-          </NavLink>}
+          </NavLink> : null}
           <NavLink
             to="/products"
             exact
@@ -33,6 +27,12 @@ function NavBar({user}) {
             exact
           >
             Wishlists
+          </NavLink>
+          <NavLink
+            to="/signup"
+            exact
+          >
+            Sign Up
           </NavLink>
         </div>
       );

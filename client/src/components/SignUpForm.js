@@ -1,10 +1,13 @@
 import React, {useState} from "react";
+import { useHistory } from "react-router-dom";
 import { Form, Grid, Segment } from "semantic-ui-react";
 
 function SignUpForm({onLogin}) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
+
+  const history = useHistory()
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -21,6 +24,8 @@ function SignUpForm({onLogin}) {
     }).then((response) => {
         response.json().then((user) => onLogin(user));
     });
+
+    history.push("/");
   }
 
     return (
