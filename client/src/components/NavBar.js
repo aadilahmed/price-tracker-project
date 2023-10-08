@@ -2,13 +2,19 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { Header } from "semantic-ui-react";
 
-function NavBar() {
+function NavBar({user}) {
     return (
         // Sidebar includes routes to Home and Create pages
         <div className="sidebar">
           <Header>
             Price Tracker
           </Header>
+          <NavLink
+            to="/login"
+            exact
+          >
+           Log In
+          </NavLink>
           <NavLink
             to="/products"
             exact

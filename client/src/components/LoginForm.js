@@ -26,10 +26,10 @@ function LoginForm({onLogin}) {
     return (
       <Grid
         textAlign="center"
-        style={{ height: "100vh", margin: "0", marginLeft: "200px" }}
+        style={{ height: "100vh", margin: "0"}}
         verticalAlign="middle"
       >
-        <Grid.Column style={{ maxWidth: 650 }}>
+        <Grid.Column style={{ maxWidth: 450 }}>
           <Segment stacked>
             <h3>Log In</h3>
             <Form onSubmit={handleSubmit}>
@@ -39,7 +39,7 @@ function LoginForm({onLogin}) {
                   label="Username"
                   placeholder="Enter username"
                   name="username"
-                  value={formData.username}
+                  value={username}
                   onChange={(e) => setUsername(e.target.value)}
                 />
                 <Form.Input
@@ -47,7 +47,7 @@ function LoginForm({onLogin}) {
                   label="Password"
                   placeholder="Enter password"
                   name="password"
-                  value={formData.password}
+                  value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
               </Form.Group>
