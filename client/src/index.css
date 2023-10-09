@@ -5,3 +5,37 @@
   --text: hsla(0, 0%, 100%, 0.88);
 }
 
+.sidebar {
+  height: 100%;
+  width: 200px;
+  position: fixed;
+  left: 0;
+  top: 0;
+  padding-top: 10px;
+}
+
+.productpage-container {
+  margin-left: 200px;
+  padding: 2rem;
+}
+
+.wishlistpage-container {
+  margin-left: 200px;
+  padding: 2rem;
+}
+
+.productdetailpage-container {
+  margin-left: 200px;
+  padding: 2rem;
+}
+
+.productcard-container {
+  display: inline-block;
+}
+
+.card_image {
+  background-size:cover;
+}
+
+
+

@@ -31,7 +31,6 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Project Client</h1>
       <NavBar user={user} setUser={setUser}/>
       <Switch>
         <Route exact path="/wishlists">
