@@ -11,6 +11,10 @@ function WishlistPage({user}) {
         setShowForm(!showForm);
     }
 
+    function handleCreateWishlist(newWishlist) {
+        setWishlists([...wishlists, newWishlist]);
+    }
+
     useEffect(() => {
         fetch('/wishlists')
         .then((response) => response.json())
@@ -25,7 +29,7 @@ function WishlistPage({user}) {
                 <h1 className="header">Wishlists</h1>
                 <br />
                 <Button onClick={showWishlistForm}>Create New Wishlist</Button>
-                {showForm ? <WishlistForm /> : null}
+                {showForm ? <WishlistForm onCreateWishlist={handleCreateWishlist}/> : null}
                 <WishlistCollection wishlists={wishlistsToDisplay} />
             </Container>
         </div>

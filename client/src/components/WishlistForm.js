@@ -2,7 +2,7 @@ import React, {useState} from "react"
 import { Form, Grid, Segment } from "semantic-ui-react";
 import { useHistory } from "react-router-dom";
 
-function WishlistForm() {
+function WishlistForm({onCreateWishlist}) {
     const [title, setTitle] = useState("")
     
     const history = useHistory()
@@ -18,7 +18,7 @@ function WishlistForm() {
             title,
           }),
         }).then((response) => {
-            response.json().then((user) => onLogin(user));
+            response.json().then((data) => onCreateWishlist(data));
         });
     
         history.push("/wishlists");
