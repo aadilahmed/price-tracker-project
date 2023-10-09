@@ -54,7 +54,7 @@ class Product(db.Model, SerializerMixin):
     prices = db.relationship('Price', backref='product')
     wishlists = db.relationship('Wishlist', secondary=wishlist_product, back_populates='products')
 
-    serialize_rules = ("-prices", "-wishlists",)
+    serialize_rules = ("-prices.product", "-wishlists.products",)
 
     def __repr__(self):
         return f"\n<Product " + \
