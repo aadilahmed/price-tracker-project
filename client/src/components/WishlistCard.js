@@ -1,26 +1,41 @@
 import React from "react";
 import { Card } from "semantic-ui-react";
+import { useHistory } from "react-router-dom";
 import ProductCard from "./ProductCard";
 
-function WishlistCard({title, products}) {
-    const productsToDisplay = products.map((product) => (
-        <ProductCard
-          key={product.id}
-          name={product.name}
-          image={product.image}
-          url={product.url}
-          current_price={product.current_price}
-        />
-      ));
+function WishlistCard({ id, title, products }) {
+  const history = useHistory()
+  const productsToDisplay = products.map((product) => (
+    <ProductCard
+      key={product.id}
+      name={product.name}
+      image={product.image}
+      url={product.url}
+      current_price={product.current_price}
+    />
+  ));
 
-    return (
-        <Card textAlign="center">
-          <div className="wishlistcard">
-            <div className="name">{title}</div>
-            <Card.Group itemsPerRow={5}>{productsToDisplay}</Card.Group>
-          </div>
-        </Card>
-      );
+  function handleDelete() {
+    fetch(`/wishlists/${id}`, {
+      method: "DELETE",
+    }).then((response) => response.json());
+
+    history.push('/wishlists')
+  }
+
+  return (
+    <Card className="wishlist-card">
+      <div className="wishlistcard">
+        <div className="name">{title}</div>
+        <i
+          className="close icon"
+          onClick={handleDelete}
+          style={{ color: "red" }}
+        />
+        <Card.Group itemsPerRow={5}>{productsToDisplay}</Card.Group>
+      </div>
+    </Card>
+  );
 }
 
-export default WishlistCard
+export default WishlistCard;

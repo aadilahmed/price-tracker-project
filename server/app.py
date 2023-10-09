@@ -121,7 +121,7 @@ class WishlistByID(Resource):
 
     def patch(self, id):
         if session.get('user_id'):
-            wishlist = Wishlist.query.filter_by(Wishlist.id==id).first()
+            wishlist = Wishlist.query.filter(Wishlist.id==id).first()
             for attr in request.form:
                 setattr(wishlist, attr, request.form[attr])
 
@@ -134,7 +134,7 @@ class WishlistByID(Resource):
 
     def delete(self, id):
         if session.get('user_id'):
-            wishlist = Wishlist.query.filter_by(Wishlist.id==id).first()
+            wishlist = Wishlist.query.filter(Wishlist.id==id).first()
 
             db.session.delete(wishlist)
             db.session.commit()

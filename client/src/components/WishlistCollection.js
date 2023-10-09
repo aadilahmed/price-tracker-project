@@ -6,6 +6,7 @@ function WishlistCollection({wishlists}) {
     const wishlistsToDisplay = wishlists.map((wishlist) => (
         <WishlistCard
           key={wishlist.id}
+          id={wishlist.id}
           title={wishlist.title}
           products={wishlist.products}
         />

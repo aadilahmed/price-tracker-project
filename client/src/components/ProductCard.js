@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Image } from "semantic-ui-react";
+import { Card } from "semantic-ui-react";
 import { useHistory } from "react-router-dom";
 
 function ProductCard({ id, name, image, url, current_price }) {
