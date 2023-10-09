@@ -15,6 +15,10 @@ function WishlistPage({user}) {
         setWishlists([...wishlists, newWishlist]);
     }
 
+    function handleDeleteWishlist(id) {
+        setWishlists(wishlists => wishlists.filter((item) => item.id !== id));
+    }
+
     useEffect(() => {
         fetch('/wishlists')
         .then((response) => response.json())
@@ -30,7 +34,7 @@ function WishlistPage({user}) {
                 <br />
                 <Button onClick={showWishlistForm}>Create New Wishlist</Button>
                 {showForm && (<WishlistForm onCreateWishlist={handleCreateWishlist} setShowForm={setShowForm}/>)}
-                <WishlistCollection wishlists={wishlistsToDisplay} />
+                <WishlistCollection wishlists={wishlistsToDisplay} onHandleDelete={handleDeleteWishlist} />
             </Container>
         </div>
     )

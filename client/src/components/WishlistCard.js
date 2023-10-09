@@ -3,7 +3,7 @@ import { Card } from "semantic-ui-react";
 import { useHistory } from "react-router-dom";
 import ProductCard from "./ProductCard";
 
-function WishlistCard({ id, title, products }) {
+function WishlistCard({ id, title, products, onHandleDelete }) {
   const history = useHistory();
   const productsToDisplay = products.map((product) => (
     <ProductCard
@@ -18,7 +18,7 @@ function WishlistCard({ id, title, products }) {
   function handleDelete() {
     fetch(`/wishlists/${id}`, {
       method: "DELETE",
-    }).then((response) => response.json());
+    }).then(() => onHandleDelete(id));
 
     history.push("/wishlists");
   }
