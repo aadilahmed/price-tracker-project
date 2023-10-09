@@ -29,7 +29,7 @@ function WishlistPage({user}) {
                 <h1 className="header">Wishlists</h1>
                 <br />
                 <Button onClick={showWishlistForm}>Create New Wishlist</Button>
-                {showForm ? <WishlistForm onCreateWishlist={handleCreateWishlist}/> : null}
+                {showForm && (<WishlistForm onCreateWishlist={handleCreateWishlist} setShowForm={setShowForm}/>)}
                 <WishlistCollection wishlists={wishlistsToDisplay} />
             </Container>
         </div>

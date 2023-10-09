@@ -2,7 +2,7 @@ import React, {useState} from "react"
 import { Form, Grid, Segment } from "semantic-ui-react";
 import { useHistory } from "react-router-dom";
 
-function WishlistForm({onCreateWishlist}) {
+function WishlistForm({onCreateWishlist, setShowForm}) {
     const [title, setTitle] = useState("")
     
     const history = useHistory()
@@ -20,15 +20,15 @@ function WishlistForm({onCreateWishlist}) {
         }).then((response) => {
             response.json().then((data) => onCreateWishlist(data));
         });
-    
+
+        setShowForm()
         history.push("/wishlists");
       }
 
     return (
         <Grid
         textAlign="center"
-        style={{ height: "100vh", margin: "0"}}
-        verticalAlign="middle"
+        style={{ height: "50vh", margin: "0"}}
       >
         <Grid.Column style={{ maxWidth: 450 }}>
           <Segment stacked>
