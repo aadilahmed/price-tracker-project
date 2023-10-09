@@ -1,8 +1,34 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
+import { Container, Button } from "semantic-ui-react";
+import WishlistCollection from "./WishlistCollection";
+import WishlistForm from "./WishlistForm";
 
 function WishlistPage({user}) {
+    const [wishlists, setWishlists] = useState([])
+    const [showForm, setShowForm] = useState(false)
+
+    function showWishlistForm() {
+        setShowForm(!showForm);
+    }
+
+    useEffect(() => {
+        fetch('/wishlists')
+        .then((response) => response.json())
+        .then((data) => setWishlists(data))
+      }, [])
+
+    const wishlistsToDisplay = wishlists
+
     return (
-        <h1>Wishlist Page</h1>
+        <div className="wishlistpage-container">
+            <Container>
+                <h1 className="header">Wishlists</h1>
+                <br />
+                <Button onClick={showWishlistForm}>Create New Wishlist</Button>
+                {showForm ? <WishlistForm /> : null}
+                <WishlistCollection wishlists={wishlistsToDisplay} />
+            </Container>
+        </div>
     )
 }
 
