@@ -38,7 +38,7 @@
 }
 
 .wishlist-card {
-  display: inline-block
+  display:inline-flex;
 }
 
 

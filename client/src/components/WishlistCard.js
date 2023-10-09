@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 import ProductCard from "./ProductCard";
 
 function WishlistCard({ id, title, products }) {
-  const history = useHistory()
+  const history = useHistory();
   const productsToDisplay = products.map((product) => (
     <ProductCard
       key={product.id}
@@ -20,18 +20,20 @@ function WishlistCard({ id, title, products }) {
       method: "DELETE",
     }).then((response) => response.json());
 
-    history.push('/wishlists')
+    history.push("/wishlists");
   }
 
   return (
     <Card className="wishlist-card">
       <div className="wishlistcard">
+        <div className="wishlist-info">
         <div className="name">{title}</div>
         <i
           className="close icon"
           onClick={handleDelete}
           style={{ color: "red" }}
         />
+        </div>
         <Card.Group itemsPerRow={5}>{productsToDisplay}</Card.Group>
       </div>
     </Card>
