@@ -6,9 +6,11 @@ import ProductPage from "./ProductPage";
 import ProductDetail from "./ProductDetail";
 import LoginForm from "./LoginForm";
 import SignUpForm from "./SignUpForm";
+import WishlistForm from "./WishlistForm"
 
 function App() {
   const [products, setProducts] = useState([]);
+  const [wishlists, setWishlists] = useState([]);
   const [user, setUser] = useState(null);
 
   useEffect(() => {
@@ -20,10 +22,24 @@ function App() {
   }, []);
 
   useEffect(() => {
-    fetch('/products')
-    .then((response) => response.json())
-    .then((data) => setProducts(data))
-  }, [])
+    fetch("/products")
+      .then((response) => response.json())
+      .then((data) => setProducts(data));
+  }, []);
+
+  function handleCreateWishlist(newWishlist) {
+    setWishlists([...wishlists, newWishlist]);
+  }
+
+  function handleDeleteWishlist(id) {
+    setWishlists((wishlists) => wishlists.filter((item) => item.id !== id));
+  }
+
+  useEffect(() => {
+    fetch("/wishlists")
+      .then((response) => response.json())
+      .then((data) => setWishlists(data));
+  }, []);
 
   /* function handleAddProduct(newProduct) {
     setProducts([...products, newProduct]);
@@ -31,10 +47,10 @@ function App() {
 
   return (
     <div className="App">
-      <NavBar user={user} setUser={setUser}/>
+      <NavBar user={user} setUser={setUser} />
       <Switch>
         <Route exact path="/wishlists">
-          <WishlistPage user={user}/>
+          <WishlistPage user={user} wishlists={wishlists} onDeleteWishlist={handleDeleteWishlist} />
         </Route>
         <Route exact path="/products">
           <ProductPage products={products} />
@@ -43,10 +59,13 @@ function App() {
           <ProductDetail />
         </Route>
         <Route exact path="/login">
-          <LoginForm onLogin={setUser}/>
+          <LoginForm onLogin={setUser} />
         </Route>
         <Route exact path="/signup">
-          <SignUpForm onLogin={setUser}/>
+          <SignUpForm onLogin={setUser} />
+        </Route>
+        <Route exact path="/create">
+          <WishlistForm onCreateWishlist={handleCreateWishlist} />
         </Route>
       </Switch>
     </div>

@@ -40,6 +40,9 @@ function NavBar({ user, setUser }) {
           <NavLink to="/wishlists" exact style={linkStyles}>
             Wishlists
           </NavLink>
+          <NavLink to="/create" exact style={linkStyles}>
+            Create Wishlist
+          </NavLink>
           <Button onClick={handleLogoutClick}>Logout</Button>
         </>
       )}
