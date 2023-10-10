@@ -35,15 +35,22 @@ function App() {
     setWishlists((wishlists) => wishlists.filter((item) => item.id !== id));
   }
 
+  function handleUpdateProduct(updatedProduct) {
+    const updatedProducts = products.map((product) => {
+      if (product.id === updatedProduct.id) {
+        return updatedProduct;
+      } else {
+        return product;
+      }
+    });
+    setProducts(updatedProducts);
+  }
+
   useEffect(() => {
     fetch("/wishlists")
       .then((response) => response.json())
       .then((data) => setWishlists(data));
   }, []);
-
-  /* function handleAddProduct(newProduct) {
-    setProducts([...products, newProduct]);
-  } */
 
   return (
     <div className="App">
@@ -56,7 +63,7 @@ function App() {
           <ProductPage products={products} />
         </Route>
         <Route exact path="/products/:id">
-          <ProductDetail />
+          <ProductDetail wishlists={wishlists} onUpdateProduct={handleUpdateProduct}/>
         </Route>
         <Route exact path="/login">
           <LoginForm onLogin={setUser} />

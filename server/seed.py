@@ -8,7 +8,7 @@ from faker import Faker
 
 # Local imports
 from app import app
-from models import db, User, Product, Price
+from models import db, User, Product, Price, Wishlist
 
 if __name__ == '__main__':
     fake = Faker()
@@ -19,6 +19,7 @@ if __name__ == '__main__':
         User.query.delete()
         Product.query.delete()
         Price.query.delete()
+        Wishlist.query.delete()
 
         users = [
             User(username="baby123"),
@@ -36,6 +37,12 @@ if __name__ == '__main__':
             Product(name="Smartphone", current_price=69999, url="https://www.amazon.com/smartphone", image="https://upload.wikimedia.org/wikipedia/commons/4/41/Hitech_Air_A1i.jpg"),
             Product(name="Coffee Maker", current_price=2999, url="https://www.amazon.com/coffee_maker", image="https://upload.wikimedia.org/wikipedia/commons/6/69/Melitta_Thermal_coffee_maker.jpg"),
             Product(name="Fitness Tracker", current_price=4999, url="https://www.amazon.com/fitness_tracker", image="https://upload.wikimedia.org/wikipedia/commons/2/22/Cardiac_Sense_Latest_Pic.png")
+        ]
+
+        wishlists = [
+            Wishlist(title="practice", user_id=8),
+            Wishlist(title="practice2", user_id=8),
+            Wishlist(title="practice3", user_id=8)
         ]
 
         laptop_prices = [
@@ -78,6 +85,9 @@ if __name__ == '__main__':
         products[2].prices = smartphone_prices
         products[3].prices = coffee_maker_prices
         products[4].prices = fitness_tracker_prices
+
+        products[2].wishlists.append(wishlists[0])
+        products[3].wishlists.append(wishlists[1])
 
         db.session.add_all(users)
         db.session.add_all(products)

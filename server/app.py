@@ -87,6 +87,16 @@ class ProductByID(Resource):
         product = Product.query.filter(Product.id == id).first().to_dict()
 
         return product, 200
+    
+    def patch(self, id):
+        product = Product.query.filter(Product.id==id).first()
+        for attr in request.form:
+            setattr(product, attr, request.form[attr])
+
+        db.session.add(product)
+        db.session.commit()
+
+        return product.to_dict(), 200
 
 class WishlistIndex(Resource):
     def get(self):

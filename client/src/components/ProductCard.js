@@ -19,7 +19,6 @@ function ProductCard({ id, name, image, url, current_price }) {
       </Card>
       <div className="name">{name}</div>
       <div className="current-price">$ {current_price / Math.pow(10, 2)}</div>
-      <i className="plus icon" style={{ color: "green" }} /> Add to Wishlist
     </div>
   );
 }
