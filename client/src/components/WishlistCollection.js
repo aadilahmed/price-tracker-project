@@ -2,8 +2,8 @@ import React from "react";
 import { Card } from "semantic-ui-react";
 import WishlistCard from "./WishlistCard";
 
-function WishlistCollection({wishlists, onHandleDelete}) {
-    const wishlistsToDisplay = wishlists.map((wishlist) => (
+function WishlistCollection({ wishlists, onHandleDelete }) {
+  /* const wishlistsToDisplay = wishlists.map((wishlist) => (
         <WishlistCard
           key={wishlist.id}
           id={wishlist.id}
@@ -11,9 +11,23 @@ function WishlistCollection({wishlists, onHandleDelete}) {
           products={wishlist.products}
           onHandleDelete={onHandleDelete}
         />
-      ));
-    
-      return <Card.Group itemsPerRow={1}>{wishlistsToDisplay}</Card.Group>;
+      )); */
+
+  return (
+    <Card.Group itemsPerRow={1}>
+      {wishlists &&
+        wishlists.length ?
+        wishlists.map((wishlist) => (
+          <WishlistCard
+            key={wishlist.id}
+            id={wishlist.id}
+            title={wishlist.title}
+            products={wishlist.products}
+            onHandleDelete={onHandleDelete}
+          />
+        )) : <h2>No wishlists!</h2>}
+    </Card.Group>
+  );
 }
 
-export default WishlistCollection
+export default WishlistCollection;
