@@ -31,15 +31,33 @@
 
 .productcard-container {
   display: inline-block;
+  padding: 1rem;
 }
 
 .card_image {
   background-size:cover;
 }
 
-.wishlist-card {
-  display:inline-flex;
+.wishlist-card-container {
+  padding-bottom: 1rem;
+  border-bottom: 1px solid black;
+  border-top: 1px solid black;
 }
 
+.product-info-container {
+  width:fit-content;
+}
 
+.graph-container {
+  width: 80%;
+  border-color: black;
+}
 
+.dropdown {
+  padding-bottom: 1rem;
+}
+
+.detail-image {
+  width: fit-content;
+  padding-bottom: 1rem;
+}

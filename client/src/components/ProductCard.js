@@ -1,5 +1,5 @@
 import React from "react";
-import { Card } from "semantic-ui-react";
+import { Card, Image } from "semantic-ui-react";
 import { useHistory } from "react-router-dom";
 
 function ProductCard({ id, name, image, url, current_price }) {
@@ -11,11 +11,9 @@ function ProductCard({ id, name, image, url, current_price }) {
   }
 
   return (
-    <div className="productCard-container">
+    <div className="productcard-container">
       <Card textalign="center" onClick={routeChange} className="card">
-        <div className="productcard">
-          <img className="ui fluid image" src={image} alt="" height={158} width={158} />
-        </div>
+          <Image size="medium" src={image} alt="" fluid/>
       </Card>
       <div className="name">{name}</div>
       <div className="current-price">$ {current_price / Math.pow(10, 2)}</div>

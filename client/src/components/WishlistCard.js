@@ -1,5 +1,5 @@
 import React from "react";
-import { Card } from "semantic-ui-react";
+import { Card, Container } from "semantic-ui-react";
 import { useHistory } from "react-router-dom";
 import ProductCard from "./ProductCard";
 
@@ -24,19 +24,18 @@ function WishlistCard({ id, title, products, onHandleDelete }) {
   }
 
   return (
-    <Card className="wishlist-card">
-      <div className="wishlistcard">
-        <div className="wishlist-info">
-        <div className="name">{title}</div>
+    <Container className="wishlist-card-container">
+      <div className="wishlist-info">
+        <h3 className="name">{title}</h3>
         <i
           className="close icon"
           onClick={handleDelete}
           style={{ color: "red" }}
-        />
-        </div>
-        <Card.Group itemsPerRow={5}>{productsToDisplay}</Card.Group>
+        />{" "}
+        Delete Wishlist
       </div>
-    </Card>
+      <Card.Group itemsPerRow={5}>{productsToDisplay}</Card.Group>
+    </Container>
   );
 }
 
