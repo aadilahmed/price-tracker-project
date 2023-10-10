@@ -43,7 +43,7 @@ function NavBar({ user, setUser }) {
           <NavLink to="/create" exact style={linkStyles}>
             Create Wishlist
           </NavLink>
-          <Button onClick={handleLogoutClick}>Logout</Button>
+          <Button onClick={handleLogoutClick} style={{ margin: "1rem" }}>Logout</Button>
         </>
       )}
     </div>

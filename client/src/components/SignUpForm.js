@@ -28,7 +28,7 @@ function SignUpForm({ onLogin }) {
       }).then((response) => {
           response.json().then((user) => onLogin(user));
       });
-      history.push("/");
+      history.push("/products");
     },
   });
 
