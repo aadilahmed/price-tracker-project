@@ -9,6 +9,11 @@ A web application that allows users to track the price history of products and a
 Run the command `pipenv install` then `pipenv shell` to start the virtual environment.
 Run the command  `npm install --prefix client` to download the dependencies for the frontend client. Run the command `python server/app.py` in one terminal and `npm start --prefix client` in another to start the application.
 
+## Screenshots
+<img src="Screenshots/price-tracker-pic-1.png">
+<img src="Screenshots/price-tracker-pic-2.png">
+<img src="Screenshots/price-tracker-pic-3.png">
+
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 

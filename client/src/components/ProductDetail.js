@@ -13,6 +13,7 @@ function ProductDetail({ wishlists, onUpdateProduct }) {
       .then((data) => setProduct(data));
   }, [id]);
 
+  // Adding product to wishlist functionality still work-in-progress
   function handleUpdateProduct(wishlist) {
     /* fetch(`/products/${id}`, {
       method: "PATCH",
@@ -27,14 +28,6 @@ function ProductDetail({ wishlists, onUpdateProduct }) {
       .then((updatedProduct) => onUpdateProduct(updatedProduct)); */
   }
 
-  const dropdownItems = wishlists.map((wishlist) => (
-    <Dropdown.Item
-      key={wishlist.id}
-      text={wishlist.title}
-      onClick={handleUpdateProduct(wishlist)}
-    />
-  ));
-
   return (
     <div className="productdetailpage-container">
       <div className="product-info-container">
@@ -46,7 +39,15 @@ function ProductDetail({ wishlists, onUpdateProduct }) {
           style={{ color: "green" }}
           className="dropdown"
         >
-          <Dropdown.Menu>{dropdownItems}</Dropdown.Menu>
+          <Dropdown.Menu>
+            {wishlists && wishlists.length ? wishlists.map((wishlist) => (
+              <Dropdown.Item
+                key={wishlist.id}
+                text={wishlist.title}
+                onClick={handleUpdateProduct(wishlist)}
+              />
+            )): <p>No wishlists!</p>}
+          </Dropdown.Menu>
         </Dropdown>
       </div>
       <div className="image-graph-container">
