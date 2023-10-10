@@ -1,6 +1,8 @@
 from sqlalchemy_serializer import SerializerMixin
 from sqlalchemy.ext.hybrid import hybrid_property
 from sqlalchemy.ext.associationproxy import association_proxy
+from sqlalchemy.orm import validates
+import re
 
 from config import db, bcrypt
 
@@ -21,6 +23,12 @@ class User(db.Model, SerializerMixin):
     wishlists = db.relationship('Wishlist', backref='user')
 
     serialize_rules = ("-wishlists", "-_password_hash",)
+
+    @validates('username') 
+    def validate_username(self, key, username):
+        if not username:
+            raise ValueError('No username provided')  
+        return username 
 
     @hybrid_property
     def password_hash(self):
@@ -56,6 +64,18 @@ class Product(db.Model, SerializerMixin):
 
     serialize_rules = ("-prices.product", "-wishlists.products",)
 
+    @validates('name') 
+    def validate_name(self, key, name):
+        if not name:
+            raise ValueError('No name provided')  
+        return name 
+    
+    @validates('url') 
+    def validate_url(self, key, url):
+        if not re.match("^https:\/\/[0-9A-z.]+.[0-9A-z.]+.[a-z]+$", url):
+            raise ValueError('Provided url is not an url address')   
+        return url
+
     def __repr__(self):
         return f"\n<Product " + \
             f"id={self.id}, " + \
@@ -85,6 +105,12 @@ class Wishlist(db.Model, SerializerMixin):
 
     products = db.relationship('Product', secondary=wishlist_product, back_populates='wishlists')
     user_id = db.Column(db.Integer(), db.ForeignKey('users.id'))
+
+    @validates('title') 
+    def validate_title(self, key, title):
+        if not title:
+            raise ValueError('No title provided')  
+        return title
 
     def __repr__(self):
         return f"\n<Wishlist " + \
