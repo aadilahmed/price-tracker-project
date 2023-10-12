@@ -26,7 +26,9 @@ function SignUpForm({ onLogin }) {
         },
         body: JSON.stringify(values),
       }).then((response) => {
-          response.json().then((user) => onLogin(user));
+          if(response.ok) {
+            response.json().then((user) => onLogin(user));
+          }
       });
       history.push("/products");
     },
