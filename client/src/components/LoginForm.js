@@ -26,26 +26,13 @@ function LoginForm({ onLogin }) {
         },
         body: JSON.stringify(values),
       }).then((response) => {
-        response.json().then((user) => onLogin(user));
+        if(response.ok){ 
+          response.json().then((user) => onLogin(user));
+        }
       });
       history.push("/products");
     },
   });
-
-  /* function handleSubmit(e) {
-    e.preventDefault();
-    fetch("/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ username, password }),
-    })
-      .then((response) => response.json())
-      .then((user) => onLogin(user));
-
-    history.push("/");
-  } */
 
   return (
     <Grid
