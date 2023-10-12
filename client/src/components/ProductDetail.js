@@ -13,19 +13,23 @@ function ProductDetail({ wishlists, onUpdateProduct }) {
       .then((data) => setProduct(data));
   }, [id]);
 
-  // Adding product to wishlist functionality still work-in-progress
-  function handleUpdateProduct(wishlist) {
-    /* fetch(`/products/${id}`, {
+  function handleClick(e, wishlist) {
+    e.preventDefault()
+    const updatedWishlists = [...wishlists, wishlist]
+    handleUpdateProduct(updatedWishlists)
+  }
+
+  // Adding product to wishlist functionality ---- still work-in-progress -----
+  function handleUpdateProduct(newWishlists) {
+    fetch(`/products/${id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        url: wishlist,
-      }),
+      body: JSON.stringify({wishlists: newWishlists}),
     })
       .then((r) => r.json())
-      .then((updatedProduct) => onUpdateProduct(updatedProduct)); */
+      .then((updatedProduct) => onUpdateProduct(updatedProduct));
   }
 
   return (
@@ -34,7 +38,7 @@ function ProductDetail({ wishlists, onUpdateProduct }) {
         <h1>{product.name}</h1>
         <h2>$ {product.current_price / Math.pow(10, 2)}</h2>
         <Dropdown
-          icon="plus icon"
+          icon="plus"
           text="Add to Wishlist"
           style={{ color: "green" }}
           className="dropdown"
@@ -44,7 +48,7 @@ function ProductDetail({ wishlists, onUpdateProduct }) {
               <Dropdown.Item
                 key={wishlist.id}
                 text={wishlist.title}
-                onClick={handleUpdateProduct(wishlist)}
+                onClick={(e) => handleClick(e, wishlist)}
               />
             )): <p>No wishlists!</p>}
           </Dropdown.Menu>

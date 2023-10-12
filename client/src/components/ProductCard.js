@@ -13,7 +13,7 @@ function ProductCard({ id, name, image, url, current_price }) {
   return (
     <div className="productcard-container">
       <Card textalign="center" onClick={routeChange} className="card">
-          <Image size="medium" src={image} alt="" fluid/>
+          <Image src={image} alt="" fluid/>
       </Card>
       <div className="name">{name}</div>
       <div className="current-price">$ {current_price / Math.pow(10, 2)}</div>
