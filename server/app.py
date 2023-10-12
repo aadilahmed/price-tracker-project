@@ -3,7 +3,7 @@
 # Standard library imports
 
 # Remote library imports
-from flask import request, session, make_response
+from flask import request, session, make_response, render_template
 from flask_restful import Resource
 from sqlalchemy.exc import IntegrityError
 
@@ -14,9 +14,16 @@ from models import *
 
 # Views go here!
 @app.route('/')
+@app.route('/productions/<int:id>')
+@app.route('/productions/<int:id>/edit')
+@app.route('/productions/new')
+def index(id=0):
+    return render_template("index.html")
+
+""" @app.route('/')
 def index():
     return '<h1>Project Server </h1>'
-
+ """
 class Signup(Resource):
     def post(self):
         username = request.get_json().get('username')
@@ -154,6 +161,10 @@ class WishlistByID(Resource):
             return response_dict, 200
         else:
             return {'error': '401 Unauthorized'}, 401
+        
+class WishlistProductByID(Resource):
+    def post(self, id):
+        pass
 
 api.add_resource(Signup, '/signup', endpoint='signup')
 api.add_resource(CheckSession, '/check_session', endpoint='check_session')
@@ -163,6 +174,7 @@ api.add_resource(ProductIndex, '/products', endpoint='products')
 api.add_resource(ProductByID, '/products/<int:id>', endpoint='product')
 api.add_resource(WishlistIndex, '/wishlists', endpoint='wishlists')
 api.add_resource(WishlistByID, '/wishlists/<int:id>', endpoint='wishlist')
+api.add_resource(WishlistProductByID, '/wishlists/<int:id>/products')
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
