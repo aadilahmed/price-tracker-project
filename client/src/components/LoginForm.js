@@ -24,13 +24,13 @@ function LoginForm({ onLogin }) {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(values),
+        body: JSON.stringify(values, null, 2),
       }).then((response) => {
-        if(response.ok){ 
+        if (response.ok) {
           response.json().then((user) => onLogin(user));
-        }
+          history.push("/products");
+        } 
       });
-      history.push("/products");
     },
   });
 

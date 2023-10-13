@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import { Image, Dropdown } from "semantic-ui-react";
 import PricesGraph from "./PricesGraph";
 
-function ProductDetail({ wishlists, onUpdateProduct }) {
+function ProductDetail({ wishlists, onUpdateWishlist }) {
   const [product, setProduct] = useState({});
   const { id } = useParams();
+
+  const history = useHistory();
 
   useEffect(() => {
     fetch(`/products/${id}`)
@@ -13,23 +15,21 @@ function ProductDetail({ wishlists, onUpdateProduct }) {
       .then((data) => setProduct(data));
   }, [id]);
 
-  function handleClick(e, wishlist) {
-    e.preventDefault()
-    const updatedWishlists = [...wishlists, wishlist]
-    handleUpdateProduct(updatedWishlists)
-  }
-
-  // Adding product to wishlist functionality ---- still work-in-progress -----
-  function handleUpdateProduct(newWishlists) {
-    fetch(`/products/${id}`, {
-      method: "PATCH",
+  function handleUpdateProduct(e, wishlist) {
+    e.preventDefault();
+    fetch(`/wishlists/${wishlist.id}/products`, {
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({wishlists: newWishlists}),
-    })
-      .then((r) => r.json())
-      .then((updatedProduct) => onUpdateProduct(updatedProduct));
+      body: JSON.stringify({
+        product_id: id,
+      }),
+    }).then((response) => {
+      response.json().then((updatedWishlist) => onUpdateWishlist(updatedWishlist));
+
+      history.push("/wishlists");
+    });
   }
 
   return (
@@ -44,13 +44,17 @@ function ProductDetail({ wishlists, onUpdateProduct }) {
           className="dropdown"
         >
           <Dropdown.Menu>
-            {wishlists && wishlists.length ? wishlists.map((wishlist) => (
-              <Dropdown.Item
-                key={wishlist.id}
-                text={wishlist.title}
-                onClick={(e) => handleClick(e, wishlist)}
-              />
-            )): <p>No wishlists!</p>}
+            {wishlists && wishlists.length ? (
+              wishlists.map((wishlist) => (
+                <Dropdown.Item
+                  key={wishlist.id}
+                  text={wishlist.title}
+                  onClick={(e) => handleUpdateProduct(e, wishlist)}
+                />
+              ))
+            ) : (
+              <p>No wishlists!</p>
+            )}
           </Dropdown.Menu>
         </Dropdown>
       </div>
