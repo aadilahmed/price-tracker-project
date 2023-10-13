@@ -164,7 +164,38 @@ class WishlistByID(Resource):
         
 class WishlistProductByID(Resource):
     def post(self, id):
-        pass
+        if session.get('user_id'):
+            wishlist = Wishlist.query.filter(Wishlist.id == id).first()
+        
+            product_id = request.get_json()['product_id']
+            product = Product.query.filter(Product.id == product_id).first()
+            
+            if not product in wishlist.products:
+                wishlist.products.append(product)
+                db.session.add(wishlist)
+                db.session.commit()
+
+                return wishlist.to_dict(), 200
+            else:
+                return {'error': '400 Product already in wishlist'}, 400
+
+        else:
+            return {'error': '401 Resource not found'}, 401
+        
+    def delete(self, id):
+        if session.get('user_id'):
+            wishlist = Wishlist.query.filter(Wishlist.id == id).first()
+        
+            product_id = request.get_json()['product_id']
+            product = Product.query.filter(Product.id == product_id).first()
+            
+            wishlist.products.remove(product)
+            db.session.add(wishlist)
+            db.session.commit()
+
+            return wishlist.to_dict(), 200
+        else:
+            return {'error': '401 Resource not found'}, 401
 
 api.add_resource(Signup, '/signup', endpoint='signup')
 api.add_resource(CheckSession, '/check_session', endpoint='check_session')
