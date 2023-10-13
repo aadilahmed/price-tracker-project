@@ -3,7 +3,7 @@
 # Standard library imports
 
 # Remote library imports
-from flask import request, session, make_response, render_template
+from flask import request, session, render_template
 from flask_restful import Resource
 from sqlalchemy.exc import IntegrityError
 
@@ -20,10 +20,6 @@ from models import *
 def index(id=0):
     return render_template("index.html")
 
-""" @app.route('/')
-def index():
-    return '<h1>Project Server </h1>'
- """
 class Signup(Resource):
     def post(self):
         username = request.get_json().get('username')
