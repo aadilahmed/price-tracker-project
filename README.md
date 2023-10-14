@@ -20,7 +20,7 @@ A web application that allows users to track the price history of products and a
 <img src="Screenshots/price-tracker-pic-5.png">
 
 ## Demo Video
-[<img width=50 height=50 src="Screenshots/price-tracker-pic-2.png" />](https://youtu.be/wtW-8adlKrg)
+[<img src="Screenshots/price-tracker-pic-2.png" />](https://youtu.be/wtW-8adlKrg)
 
 ## Files
 ### Back-end 
