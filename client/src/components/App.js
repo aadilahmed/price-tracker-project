@@ -27,6 +27,12 @@ function App() {
       .then((data) => setProducts(data));
   }, []);
 
+  useEffect(() => {
+    fetch("/wishlists")
+      .then((response) => response.json())
+      .then((data) => setWishlists(data));
+  }, []);
+
   function handleCreateWishlist(newWishlist) {
     setWishlists([...wishlists, newWishlist]);
   }
@@ -45,12 +51,6 @@ function App() {
     });
     setWishlists(updatedWishlists);
   }
-
-  useEffect(() => {
-    fetch("/wishlists")
-      .then((response) => response.json())
-      .then((data) => setWishlists(data));
-  }, []);
 
   return (
     <div className="App">
