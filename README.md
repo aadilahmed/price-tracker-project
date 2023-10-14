@@ -46,6 +46,8 @@ A web application that allows users to track the price history of products and a
 * Components which set up the "All Products" page. Each individual ProductCard is a part of the ProductCollection which is displayed on the ProductPage.
 #### ProductDetail.js
 * Displays the detail view of an individual product. Contains the name, current price, image, and a graph of the price history of the product. Users can add the product to a wishlist by selecting one from the "Add to Wishlist" dropdown menu. 
+#### ProductListing.js
+* List component that is displayed on the wishlist page.
 #### PricesGraph.js
 * Graph component which uses the chart.js library to generate graph of a product's history of prices.
 #### WishlistPage.js / WishlistCollection.js / WishlistCard.js
