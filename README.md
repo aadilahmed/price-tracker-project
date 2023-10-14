@@ -17,7 +17,7 @@ A web application that allows users to track the price history of products and a
 ## Screenshots
 <img src="Screenshots/price-tracker-pic-1.png">
 <img src="Screenshots/price-tracker-pic-2.png">
-<img src="Screenshots/price-tracker-pic-3.png">
+<img src="Screenshots/price-tracker-pic-5.png">
 
 ## Files
 ### Back-end 
