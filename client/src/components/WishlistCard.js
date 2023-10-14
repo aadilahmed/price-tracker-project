@@ -1,18 +1,18 @@
 import React from "react";
 import { Card, Container } from "semantic-ui-react";
-import { useHistory } from "react-router-dom";
-import ProductCard from "./ProductCard";
+import ProductListing from "./ProductListing";
 
-function WishlistCard({ id, title, products, onHandleDelete }) {
-  const history = useHistory();
+function WishlistCard({ id, title, products, onHandleDelete, onUpdateWishlist }) {
   const productsToDisplay = products.map((product) => (
-    <ProductCard
+    <ProductListing
       key={product.id}
       id={product.id}
       name={product.name}
       image={product.image}
       url={product.url}
       current_price={product.current_price}
+      wishlist_id={id}
+      onUpdateWishlist={onUpdateWishlist}
     />
   ));
 
@@ -20,14 +20,12 @@ function WishlistCard({ id, title, products, onHandleDelete }) {
     fetch(`/wishlists/${id}`, {
       method: "DELETE",
     }).then(() => onHandleDelete(id));
-
-    history.push("/wishlists");
   }
 
   return (
     <Container className="wishlist-card-container">
       <div className="wishlist-info">
-        <h3 className="name">{title}</h3>
+        <h1 className="wishlist-name">{title}</h1>
         <i
           className="close icon"
           onClick={handleDelete}
@@ -35,7 +33,7 @@ function WishlistCard({ id, title, products, onHandleDelete }) {
         />{" "}
         Delete Wishlist
       </div>
-      <Card.Group itemsPerRow={5}>{productsToDisplay}</Card.Group>
+      <Card.Group itemsPerRow={1} className="product-listings">{productsToDisplay}</Card.Group>
     </Container>
   );
 }

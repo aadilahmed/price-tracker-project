@@ -57,7 +57,7 @@ function App() {
       <NavBar user={user} setUser={setUser} />
       <Switch>
         <Route exact path="/wishlists">
-          <WishlistPage user={user} wishlists={wishlists} onDeleteWishlist={handleDeleteWishlist} />
+          <WishlistPage user={user} wishlists={wishlists} onDeleteWishlist={handleDeleteWishlist} onUpdateWishlist={handleUpdateWishlist}/>
         </Route>
         <Route exact path="/products">
           <ProductPage products={products} />

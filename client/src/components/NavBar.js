@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { Header, Button } from "semantic-ui-react";
+import { Header } from "semantic-ui-react";
 
 const linkStyles = {
   display: "block",

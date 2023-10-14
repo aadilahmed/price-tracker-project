@@ -61,3 +61,37 @@
   width: fit-content;
   padding-bottom: 1rem;
 }
+
+.product-listings {
+  padding:1rem;
+  width: 100%;
+}
+
+.productlisting-container {
+  padding: 1rem;
+  width:100%;
+  display: inline-flex;
+  justify-content: space-between;
+  border-top: 1px solid #BFBFBF;
+}
+
+.product-listing-info-container {
+  width: fit-content;
+  padding-left: 2rem;
+}
+
+.header {
+  font-size: 40px;
+}
+
+.name {
+  font-size: 20px;
+}
+
+.remove-product-div {
+  display: inline-flex;
+}
+
+.image-and-info-container {
+  display: inline-flex;
+}
