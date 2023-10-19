@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import { Container } from "semantic-ui-react";
 import ProductCollection from "./ProductCollection";
-import Search from "./Search";
+import Search from "../Search";
 
 function ProductPage({ products }) {
     const [query, setQuery] = useState("");

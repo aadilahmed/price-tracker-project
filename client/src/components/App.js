@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Switch, Route } from "react-router-dom";
 import NavBar from "./NavBar";
-import WishlistPage from "./WishlistPage";
-import ProductPage from "./ProductPage";
-import ProductDetail from "./ProductDetail";
+import WishlistPage from "./pages/WishlistPage";
+import ProductPage from "./pages/ProductPage";
+import ProductDetail from "./pages/ProductDetail";
 import LoginForm from "./LoginForm";
 import SignUpForm from "./SignUpForm";
-import WishlistForm from "./WishlistForm"
+import WishlistForm from "./pages/WishlistForm";
 
 function App() {
   const [products, setProducts] = useState([]);
