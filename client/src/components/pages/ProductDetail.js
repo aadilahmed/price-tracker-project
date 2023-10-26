@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { Image, Dropdown } from "semantic-ui-react";
 import PricesGraph from "./PricesGraph";
 
@@ -7,7 +7,7 @@ function ProductDetail({ wishlists, onUpdateWishlist }) {
   const [product, setProduct] = useState({});
   const { id } = useParams();
 
-  const history = useHistory();
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch(`/products/${id}`)
@@ -28,7 +28,7 @@ function ProductDetail({ wishlists, onUpdateWishlist }) {
     }).then((response) => {
       response.json().then((updatedWishlist) => onUpdateWishlist(updatedWishlist));
 
-      history.push("/wishlists");
+      navigate("/wishlists");
     });
   }
 

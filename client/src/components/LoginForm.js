@@ -1,11 +1,11 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import { Grid, Segment } from "semantic-ui-react";
 import * as yup from "yup";
 
 function LoginForm({ onLogin }) {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const formSchema = yup.object().shape({
     username: yup.string().required("Must enter username"),
@@ -28,7 +28,7 @@ function LoginForm({ onLogin }) {
       }).then((response) => {
         if (response.ok) {
           response.json().then((user) => onLogin(user));
-          history.push("/products");
+          navigate("/products");
         } 
       });
     },

@@ -1,5 +1,5 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Icon, Image } from "semantic-ui-react";
 
 function ProductListing({
@@ -11,11 +11,11 @@ function ProductListing({
   wishlist_id,
   onUpdateWishlist,
 }) {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   function routeChange() {
     let path = `/products/${id}`;
-    history.push(path);
+    navigate(path);
   }
 
   function handleProductDeleteFromWishlist(e, id) {

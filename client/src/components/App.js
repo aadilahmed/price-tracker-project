@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Switch, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import NavBar from "./NavBar";
 import WishlistPage from "./pages/WishlistPage";
 import ProductPage from "./pages/ProductPage";
@@ -55,26 +55,14 @@ function App() {
   return (
     <div className="App">
       <NavBar user={user} setUser={setUser} />
-      <Switch>
-        <Route exact path="/wishlists">
-          <WishlistPage user={user} wishlists={wishlists} onDeleteWishlist={handleDeleteWishlist} onUpdateWishlist={handleUpdateWishlist}/>
-        </Route>
-        <Route exact path="/products">
-          <ProductPage products={products} />
-        </Route>
-        <Route exact path="/products/:id">
-          <ProductDetail wishlists={wishlists} onUpdateWishlist={handleUpdateWishlist}/>
-        </Route>
-        <Route exact path="/login">
-          <LoginForm onLogin={setUser} />
-        </Route>
-        <Route exact path="/signup">
-          <SignUpForm onLogin={setUser} />
-        </Route>
-        <Route exact path="/create">
-          <WishlistForm onCreateWishlist={handleCreateWishlist} />
-        </Route>
-      </Switch>
+      <Routes>
+        <Route path="wishlists" element={ <WishlistPage user={user} wishlists={wishlists} onDeleteWishlist={handleDeleteWishlist} onUpdateWishlist={handleUpdateWishlist}/>}/>
+        <Route path="products" element={ <ProductPage products={products} /> } />
+        <Route path="products/:id" element={ <ProductDetail wishlists={wishlists} onUpdateWishlist={handleUpdateWishlist}/> } />
+        <Route path="login" element={ <LoginForm onLogin={setUser} /> } />
+        <Route path="signup" element={ <SignUpForm onLogin={setUser} /> } />
+        <Route path="create" element={ <WishlistForm onCreateWishlist={handleCreateWishlist} /> } />
+      </Routes>
     </div>
   );
 }

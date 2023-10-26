@@ -23,27 +23,27 @@ function NavBar({ user, setUser }) {
   return (
     <div className="sidebar">
       <Header style={linkStyles}>Price Tracker</Header>
-      <NavLink to="/products" exact style={linkStyles}>
+      <NavLink to="/products" end style={linkStyles}>
         All Products
       </NavLink>
       {!user ? (
         <>
-          <NavLink to="/login" exact style={linkStyles}>
+          <NavLink to="/login" end style={linkStyles}>
             Log In
           </NavLink>
-          <NavLink to="/signup" exact style={linkStyles}>
+          <NavLink to="/signup" end style={linkStyles}>
             Sign Up
           </NavLink>
         </>
       ) : (
         <>
-          <NavLink to="/wishlists" exact style={linkStyles}>
+          <NavLink to="/wishlists" end style={linkStyles}>
             Wishlists
           </NavLink>
-          <NavLink to="/create" exact style={linkStyles}>
+          <NavLink to="/create" end style={linkStyles}>
             Create Wishlist
           </NavLink>
-          <NavLink to="/login" exact style={linkStyles} onClick={handleLogoutClick}>
+          <NavLink to="/login" end style={linkStyles} onClick={handleLogoutClick}>
             Logout
           </NavLink>
         </>

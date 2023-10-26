@@ -1,13 +1,13 @@
 import React from "react";
 import { Card, Image } from "semantic-ui-react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function ProductCard({ id, name, image, url, current_price }) {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   function routeChange() {
     let path = `/products/${id}`;
-    history.push(path);
+    navigate(path);
   }
 
   return (

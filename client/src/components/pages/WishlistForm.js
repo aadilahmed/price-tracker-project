@@ -1,11 +1,11 @@
 import React, {useState} from "react"
 import { Form, Grid, Segment } from "semantic-ui-react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function WishlistForm({onCreateWishlist}) {
     const [title, setTitle] = useState("")
-    
-    const history = useHistory()
+
+    const navigate = useNavigate()
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -21,7 +21,7 @@ function WishlistForm({onCreateWishlist}) {
             response.json().then((data) => onCreateWishlist(data));
         });
 
-        history.push("/wishlists");
+        navigate("/wishlists");
       }
 
     return (
