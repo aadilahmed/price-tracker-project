@@ -28,6 +28,32 @@ function App() {
   }, []);
 
   useEffect(() => {
+    const query = `
+  query amazonProduct {
+    amazonProduct(input: {asin: "B0B3JBVDYP"}) {
+      title
+      mainImageUrl
+      rating
+      price {
+        display
+      }
+    }
+  }
+`;
+    fetch("https://graphql.canopyapi.co/", {
+      method: "POST",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json",
+        "API-KEY": proccess.env.REACT_APP_API_KEY,
+      },
+      body: JSON.stringify({ query }),
+    })
+      .then((response) => response.json())
+      .then((data) => setProducts(data));
+  }, []);
+
+  useEffect(() => {
     fetch("/wishlists")
       .then((response) => response.json())
       .then((data) => setWishlists(data));
@@ -56,12 +82,33 @@ function App() {
     <div className="App">
       <NavBar user={user} setUser={setUser} />
       <Routes>
-        <Route path="wishlists" element={ <WishlistPage user={user} wishlists={wishlists} onDeleteWishlist={handleDeleteWishlist} onUpdateWishlist={handleUpdateWishlist}/>}/>
-        <Route path="products" element={ <ProductPage products={products} /> } />
-        <Route path="products/:id" element={ <ProductDetail wishlists={wishlists} onUpdateWishlist={handleUpdateWishlist}/> } />
-        <Route path="login" element={ <LoginForm onLogin={setUser} /> } />
-        <Route path="signup" element={ <SignUpForm onLogin={setUser} /> } />
-        <Route path="create" element={ <WishlistForm onCreateWishlist={handleCreateWishlist} /> } />
+        <Route
+          path="wishlists"
+          element={
+            <WishlistPage
+              user={user}
+              wishlists={wishlists}
+              onDeleteWishlist={handleDeleteWishlist}
+              onUpdateWishlist={handleUpdateWishlist}
+            />
+          }
+        />
+        <Route path="products" element={<ProductPage products={products} />} />
+        <Route
+          path="products/:id"
+          element={
+            <ProductDetail
+              wishlists={wishlists}
+              onUpdateWishlist={handleUpdateWishlist}
+            />
+          }
+        />
+        <Route path="login" element={<LoginForm onLogin={setUser} />} />
+        <Route path="signup" element={<SignUpForm onLogin={setUser} />} />
+        <Route
+          path="create"
+          element={<WishlistForm onCreateWishlist={handleCreateWishlist} />}
+        />
       </Routes>
     </div>
   );
