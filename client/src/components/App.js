@@ -24,33 +24,7 @@ function App() {
   useEffect(() => {
     fetch("/products")
       .then((response) => response.json())
-      .then((data) => setProducts(data));
-  }, []);
-
-  useEffect(() => {
-    const query = `
-  query amazonProduct {
-    amazonProduct(input: {asin: "B0B3JBVDYP"}) {
-      title
-      mainImageUrl
-      rating
-      price {
-        display
-      }
-    }
-  }
-`;
-    fetch("https://graphql.canopyapi.co/", {
-      method: "POST",
-      mode: "cors",
-      headers: {
-        "Content-Type": "application/json",
-        "API-KEY": proccess.env.REACT_APP_API_KEY,
-      },
-      body: JSON.stringify({ query }),
-    })
-      .then((response) => response.json())
-      .then((data) => setProducts(data));
+      .then((data) => setProducts(data))
   }, []);
 
   useEffect(() => {
@@ -76,6 +50,19 @@ function App() {
       }
     });
     setWishlists(updatedWishlists);
+  }
+
+  function createNewProduct(data) {
+    const product = data.data.amazonProduct
+    const newProduct = {
+      "id": 6,
+      "name": product.title,
+      "image": product.mainImageUrl,
+      "current_price": product.price,
+      "url": product.url,
+    }
+
+    setProducts((products) => [...products, newProduct]);
   }
 
   return (
