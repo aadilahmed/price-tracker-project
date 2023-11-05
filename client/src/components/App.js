@@ -25,7 +25,35 @@ function App() {
     fetch("/products")
       .then((response) => response.json())
       .then((data) => setProducts(data))
+      .then((data) => queryCanopy());
   }, []);
+
+  function queryCanopy() {
+    const query = `
+      query amazonProduct {
+        amazonProduct(input: {asin: "B0B3JBVDYP"}) {
+          title
+          url
+          mainImageUrl
+          rating
+          price {
+            display
+          }
+        }
+      }
+    `;
+    fetch("https://graphql.canopyapi.co/", {
+      method: "POST",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json",
+        "API-KEY": process.env.REACT_APP_API_KEY,
+      },
+      body: JSON.stringify({ query }),
+    })
+      .then((response) => response.json())
+      .then((data) => createNewProduct(data));
+  }
 
   useEffect(() => {
     fetch("/wishlists")
