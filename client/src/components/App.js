@@ -37,7 +37,7 @@ function App() {
           mainImageUrl
           rating
           price {
-            display
+            value
           }
         }
       }
@@ -86,7 +86,7 @@ function App() {
       "id": 6,
       "name": product.title,
       "image": product.mainImageUrl,
-      "current_price": product.price,
+      "current_price": product.price.value * Math.pow(10, 2),
       "url": product.url,
     }
 
