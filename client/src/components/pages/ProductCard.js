@@ -15,7 +15,7 @@ function ProductCard({ id, name, image, url, current_price }) {
       <Card textalign="center" onClick={routeChange} className="card">
           <Image src={image} alt="" fluid/>
       </Card>
-      <div className="name">{name}</div>
+      <div className="name">{name.length > 30 ? `${name.substring(0, 30)} ...` : name}</div>
       <div className="current-price">$ {current_price / Math.pow(10, 2)}</div>
     </div>
   );
