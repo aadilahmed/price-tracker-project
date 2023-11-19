@@ -25,13 +25,12 @@ function App() {
     fetch("/products")
       .then((response) => response.json())
       .then((data) => setProducts(data))
-      .then((data) => queryCanopy());
   }, []);
 
-  function queryCanopy() {
+  useEffect(() => {
     const query = `
       query amazonProduct {
-        amazonProduct(input: {asin: "B0B3JBVDYP"}) {
+        amazonProduct(input: {asin: "B0BDHWDR12"}) {
           title
           url
           mainImageUrl
@@ -53,7 +52,7 @@ function App() {
     })
       .then((response) => response.json())
       .then((data) => createNewProduct(data));
-  }
+  }, []);
 
   useEffect(() => {
     fetch("/wishlists")
