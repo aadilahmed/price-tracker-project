@@ -35,7 +35,7 @@ function ProductDetail({ wishlists, onUpdateWishlist }) {
   return (
     <div className="productdetailpage-container">
       <div className="product-info-container">
-        <h1>{product.name}</h1>
+        <h1 className="product-detail-name">{product.name}</h1>
         <h2>$ {product.current_price / Math.pow(10, 2)}</h2>
         <Dropdown
           icon="plus"
@@ -65,6 +65,7 @@ function ProductDetail({ wishlists, onUpdateWishlist }) {
           src={product.image}
           alt=""
         />
+        <h2>Price Change History</h2>
         <div className="graph-container">
           {product.prices ? <PricesGraph prices={product.prices} /> : null}
         </div>

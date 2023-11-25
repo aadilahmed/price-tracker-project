@@ -48,6 +48,10 @@
   width:fit-content;
 }
 
+.product-detail-name {
+  font-size: 2.25rem;
+}
+
 .graph-container {
   width: 80%;
   border-color: black;
