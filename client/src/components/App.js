@@ -28,6 +28,33 @@ function App() {
   }, []);
 
   useEffect(() => {
+    const query = `
+      query amazonProduct {
+        amazonProduct(input: {asin: "B0BDHWDR12"}) {
+          title
+          url
+          mainImageUrl
+          rating
+          price {
+            value
+          }
+        }
+      }
+    `;
+    fetch("https://graphql.canopyapi.co/", {
+      method: "POST",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json",
+        "API-KEY": process.env.REACT_APP_API_KEY,
+      },
+      body: JSON.stringify({ query }),
+    })
+      .then((response) => response.json())
+      .then((data) => createNewProduct(data));
+  }, []);
+
+  useEffect(() => {
     fetch("/wishlists")
       .then((response) => response.json())
       .then((data) => setWishlists(data));
