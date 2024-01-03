@@ -79,6 +79,19 @@ function App() {
     setWishlists(updatedWishlists);
   }
 
+  function createNewProduct(data) {
+    const product = data.data.amazonProduct
+    const newProduct = {
+      "id": 6,
+      "name": product.title,
+      "image": product.mainImageUrl,
+      "current_price": product.price.value*100,
+      "url": product.url,
+    }
+
+    setProducts((products) => [...products, newProduct]);
+  }
+
   return (
     <div className="App">
       <NavBar user={user} setUser={setUser} />
