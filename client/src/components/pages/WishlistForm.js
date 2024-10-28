@@ -18,7 +18,7 @@ function WishlistForm({onCreateWishlist}) {
             title,
           }),
         }).then((response) => {
-            response.json().then((data) => {console.log(data); onCreateWishlist(data)});
+            response.json().then((data) => onCreateWishlist(data));
         });
 
         navigate("/wishlists");
